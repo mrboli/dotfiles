@@ -23,6 +23,12 @@ syntax on
 
 set clipboard=unnamed
 
+"folding settings
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1         "this is just what i use
+
 "set t_Co=256
 let base16colorspace=256
 set background=dark
@@ -75,10 +81,10 @@ map <S-j> <C-W>+
 "       name              | ,
 "       kill              | &
     
-" function DeleteHiddenBuffers()
-"   let tpbl=[]
-"   call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
-"   for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
-"     silent execute 'bwipeout' buf
-"   endfor
-" endfunction
+function DeleteHiddenBuffers()
+  let tpbl=[]
+  call map(range(1, tabpagenr('$')), 'extend(tpbl, tabpagebuflist(v:val))')
+  for buf in filter(range(1, bufnr('$')), 'bufexists(v:val) && index(tpbl, v:val)==-1')
+    silent execute 'bwipeout' buf
+  endfor
+endfunction
